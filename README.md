@@ -1,15 +1,18 @@
 # Twitter Takip Edilmeyen Bulucu Chrome Eklentisi
 
-Bu Chrome eklentisi, Twitter'da (X) sizi takip etmeyen kullanıcıları tek sayfada hızlıca bulur.
+Twitter'da (X) sizi takip etmeyen kullanıcıları kolayca bulun ve toplu takibi bırakma işlemi yapın.
 
 ## Özellikler
 
-- ✅ Tek sayfada tüm analizi yapar (sadece Following listesi)
-- ✅ "Seni takip ediyor" bilgisini kontrol eder
-- ✅ Çok daha hızlı sonuç verir
-- ✅ Detaylı timeline/log sistemi
-- ✅ Modern ve kullanışlı arayüz
-- ✅ Direkt takibi bırakma özelliği
+- ✅ Modern dashboard arayüzü
+- ✅ Tek sayfada hızlı analiz (sadece Following listesi)
+- ✅ "Seni takip ediyor" bilgisini otomatik kontrol eder
+- ✅ Gerçek zamanlı tarama ilerlemesi
+- ✅ Toplu takibi bırakma (checkbox ile seçim)
+- ✅ Ayarlanabilir hız seçenekleri (0.5s - 2s arası)
+- ✅ Tarama sonuçları otomatik kaydedilir
+- ✅ Tarama bitince otomatik dashboard'a yönlendirme
+- ✅ Kullanıcı arama ve filtreleme
 
 ## Nasıl Çalışır?
 
@@ -29,19 +32,17 @@ Twitter'da takip ettiğiniz kişilerin profillerinde "Seni takip ediyor" (Follow
 
 2. **Kullanım**:
    - Twitter'a (x.com) giriş yapın
-   - Chrome araç çubuğundaki eklenti ikonuna tıklayın
-   - "Tarama Başlat" butonuna basın
+   - Chrome araç çubuğundaki eklenti ikonuna tıklayın (Dashboard açılır)
+   - "Taramayı Başlat" butonuna basın
    - Eklenti otomatik olarak:
-     - Önce takip ettiklerinizi tarayacak
-     - Sonra takipçilerinize geçecek  
-     - Karşılaştırma yapıp sonuçları gösterecek
-   - Sonuçlar gösterildiğinde istediğiniz kullanıcıların takibini bırakabilirsiniz
-   - Twitter'a (x.com) giriş yapın
-   - Kendi profil sayfanıza gidin
-   - Chrome araç çubuğundaki eklenti ikonuna tıklayın
-   - "Tarama Başlat" butonuna basın
-   - Eklenti otomatik olarak takip ettiklerinizi ve takipçilerinizi tarayacak
-   - Sonuçlar gösterildiğinde istediğiniz kullanıcıların takibini bırakabilirsiniz
+     - Twitter Following sayfanıza yönlendirir
+     - Takip ettiklerinizi tek tek tarar
+     - "Seni takip ediyor" yazısını kontrol eder
+     - Tarama bitince dashboard'a geri döner
+   - Dashboard'da:
+     - Checkbox ile istediğiniz kullanıcıları seçin
+     - Hız ayarını belirleyin (Çok Hızlı/Hızlı/Normal/Yavaş)
+     - "Takibi Bırak" butonuna basın
 
 ## Önemli Notlar
 
@@ -69,8 +70,10 @@ Twitter'da takip ettiğiniz kişilerin profillerinde "Seni takip ediyor" (Follow
 ## Geliştirme
 
 Kodu geliştirmek isterseniz:
-- `content.js`: Twitter sayfasında çalışan ana mantık
-- `popup.js`: Eklenti popup'ının kontrolü
+- `content.js`: Twitter sayfasında çalışan ana mantık (tarama ve unfollow)
+- `dashboard.js`: Dashboard sayfasının kontrolü
+- `background.js`: Tab yönetimi ve mesaj iletimi
+- `index.html` & `styles.css`: Dashboard arayüzü
 - `manifest.json`: Eklenti yapılandırması
 
 ## Lisans
