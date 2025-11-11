@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Takip Edilmeyen Bulucu</title>
+    <style>
+        body {
+            width: 400px;
+            min-height: 500px;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+            background-color: #f7f9fa;
+            margin: 0;
+        }
+        h1 {
+            font-size: 20px;
+            color: #1da1f2;
+            margin-bottom: 20px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        h1:before {
+            content: "🐦";
+            font-size: 24px;
+        }
+        .control-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        button {
+            flex: 1;
+            padding: 12px;
+            background-color: #1da1f2;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background-color: #1a91da;
+            transform: translateY(-1px);
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        #stopBtn {
+            background-color: #e0245e;
+        }
+        #stopBtn:hover {
+            background-color: #c7204d;
+        }
+        #clearBtn {
+            background-color: #6c757d;
+        }
+        #clearBtn:hover {
+            background-color: #5a6268;
+        }
+        #progress {
+            width: 100%;
+            height: 8px;
+            background-color: #e1e8ed;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            display: none;
+        }
+        #progressBar {
+            height: 100%;
+            background: linear-gradient(90deg, #1da1f2, #1a91da);
+            width: 0%;
+            transition: width 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        #progressBar:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            animation: shimmer 1.5s infinite;
+        }
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        .timeline {
+            background-color: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+        }
+        .timeline-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: #536471;
+            padding-left: 20px;
+            position: relative;
+        }
+        .timeline-item:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #1da1f2;
+            font-size: 20px;
+            line-height: 16px;
+        }
+        .timeline-item.error:before {
+            content: "✖";
+            color: #e0245e;
+            font-size: 12px;
+            left: 2px;
+        }
+        .timeline-item.success:before {
+            content: "✓";
+            color: #17bf63;
+            font-size: 12px;
+            left: 2px;
+        }
+        .timeline-item .time {
+            color: #8899a6;
+            margin-right: 8px;
+            font-size: 12px;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 15px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: none;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1da1f2;
+            line-height: 1;
+        }
+        .stat-label {
+            font-size: 13px;
+            color: #536471;
+            margin-top: 5px;
+        }
+        #results {
+            background-color: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: none;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        #results h3 {
+            margin: 0 0 15px 0;
+            font-size: 16px;
+            color: #14171a;
+        }
+        .user-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            border-radius: 8px;
+            transition: background-color 0.2s;
+            margin-bottom: 8px;
+        }
+        .user-item:hover {
+            background-color: #f7f9fa;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #e1e8ed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #536471;
+        }
+        .username {
+            font-weight: 600;
+            color: #14171a;
+            font-size: 15px;
+        }
+        .username:hover {
+            color: #1da1f2;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .unfollow-btn {
+            padding: 6px 16px;
+            font-size: 13px;
+            background-color: #fff;
+            border: 1px solid #cfd9de;
+            color: #14171a;
+            border-radius: 20px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .unfollow-btn:hover {
+            background-color: #fef2f2;
+            border-color: #e0245e;
+            color: #e0245e;
+        }
+        #status {
+            text-align: center;
+            font-size: 14px;
+            color: #536471;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #536471;
+        }
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #8899a6;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Twitter Takip Edilmeyen Bulucu</h1>
+    
+    <div class="control-buttons">
+        <button id="scanBtn">🔍 Tarama Başlat</button>
+        <button id="stopBtn" style="display: none;">⏹ Durdur</button>
+        <button id="clearBtn" style="display: none;">🗑 Temizle</button>
+    </div>
+    
+    <div id="progress">
+        <div id="progressBar"></div>
+    </div>
+    
+    <div id="status">Tarama başlatmak için butona tıklayın</div>
+    
+    <div class="timeline" id="timeline">
+        <!-- Timeline items will be added here -->
+    </div>
+    
+    <div class="stats" id="stats">
+        <div class="stat-item">
+            <div class="stat-number" id="followingCount">0</div>
+            <div class="stat-label">Kontrol Edilen</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number" id="notFollowingBack">0</div>
+            <div class="stat-label">Takip Etmeyen</div>
+        </div>
+    </div>
+    
+    <div id="results"></div>
+    
+    <div class="footer">
+        Twitter Takip Analizi v1.0
+    </div>
+    
+    <script src="popup.js"></script>
+</body>
+</html>

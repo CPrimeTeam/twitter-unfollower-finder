@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Analytics Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="brand">
+                <div class="brand-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" stroke="url(#gradient1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <defs>
+                            <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#3b82f6"/>
+                                <stop offset="100%" style="stop-color:#8b5cf6"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <div class="brand-title">Twitter</div>
+                    <div class="brand-subtitle">Analytics</div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <div class="nav-label">ANA MENÜ</div>
+                <div class="nav-item active">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    <span>Takip Analizi</span>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-label">İŞLEMLER</div>
+                <button id="clearBtn" class="nav-item nav-action" style="display: none;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                    </svg>
+                    <span>Verileri Temizle</span>
+                </button>
+            </div>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="footer-card">
+                <div class="footer-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 16v-4M12 8h.01"/>
+                    </svg>
+                </div>
+                <div class="footer-text">
+                    <div class="footer-title">Önemli Uyarı</div>
+                    <div class="footer-desc">Tarama sırasında Twitter sekmesi aktif kalmalı</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-wrapper">
+        <!-- Top Bar -->
+        <div class="topbar">
+            <div class="topbar-left">
+                <h1 class="page-title">Takip Analizi</h1>
+                <div class="page-breadcrumb">
+                    <span>Dashboard</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                    <span>Analiz</span>
+                </div>
+            </div>
+            <div class="topbar-right">
+                <div id="connectionStatus" class="connection-status">
+                    <div class="status-dot"></div>
+                    <span>Bağlı</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="dashboard-section">
+            <div id="stats" class="stats-container" style="display: none;">
+                <div class="stat-card primary">
+                    <div class="stat-background">
+                        <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+                            <circle cx="60" cy="60" r="50" stroke="rgba(59, 130, 246, 0.1)" stroke-width="20"/>
+                        </svg>
+                    </div>
+                    <div class="stat-header">
+                        <div class="stat-icon-wrapper primary">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                            </svg>
+                        </div>
+                        <div class="stat-title">Kontrol Edilen</div>
+                    </div>
+                    <div class="stat-value" id="followingCount">0</div>
+                    <div class="stat-footer">
+                        <span class="stat-change positive">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="18 15 12 9 6 15"/>
+                            </svg>
+                            Toplam takip
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card danger">
+                    <div class="stat-background">
+                        <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+                            <circle cx="60" cy="60" r="50" stroke="rgba(239, 68, 68, 0.1)" stroke-width="20"/>
+                        </svg>
+                    </div>
+                    <div class="stat-header">
+                        <div class="stat-icon-wrapper danger">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                                <circle cx="8.5" cy="7" r="4"/>
+                                <line x1="18" y1="8" x2="23" y2="13"/>
+                                <line x1="23" y1="8" x2="18" y2="13"/>
+                            </svg>
+                        </div>
+                        <div class="stat-title">Takip Etmeyen</div>
+                    </div>
+                    <div class="stat-value" id="notFollowingBack">0</div>
+                    <div class="stat-footer">
+                        <span class="stat-change negative">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                            Sizi takip etmiyor
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card success">
+                    <div class="stat-background">
+                        <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+                            <circle cx="60" cy="60" r="50" stroke="rgba(34, 197, 94, 0.1)" stroke-width="20"/>
+                        </svg>
+                    </div>
+                    <div class="stat-header">
+                        <div class="stat-icon-wrapper success">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                        </div>
+                        <div class="stat-title">Karşılıklı Takip</div>
+                    </div>
+                    <div class="stat-value" id="mutualFollowCount">0</div>
+                    <div class="stat-footer">
+                        <span class="stat-change positive">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="18 15 12 9 6 15"/>
+                            </svg>
+                            Aktif takip
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scan Control Section -->
+        <div class="dashboard-section">
+            <div class="scan-control-card">
+                <div class="scan-control-content">
+                    <div class="scan-info">
+                        <div class="scan-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="url(#gradient2)" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"/>
+                                <path d="M21 21l-4.35-4.35"/>
+                            </svg>
+                            <defs>
+                                <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#3b82f6"/>
+                                    <stop offset="100%" style="stop-color:#8b5cf6"/>
+                                </linearGradient>
+                            </defs>
+                        </div>
+                        <div class="scan-text">
+                            <h3>Tarama Başlat</h3>
+                            <p id="status">Sisteminiz hazır. Takip analizine başlamak için butona tıklayın.</p>
+                        </div>
+                    </div>
+                    <div class="scan-actions">
+                        <button id="scanBtn" class="action-btn primary-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="5 3 19 12 5 21 5 3"/>
+                            </svg>
+                            <span>Taramayı Başlat</span>
+                        </button>
+                        <button id="stopBtn" class="action-btn danger-btn" style="display: none;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="6" y="6" width="12" height="12" rx="2"/>
+                            </svg>
+                            <span>Durdur</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Progress -->
+                <div id="progress" class="scan-progress" style="display: none;">
+                    <div class="progress-track">
+                        <div id="progressBar" class="progress-active"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="resultsContainer" class="dashboard-section" style="display: none;">
+            <!-- Section Header -->
+            <div class="section-header-card">
+                <div class="section-header-left">
+                    <h2 class="section-title">Tarama Sonuçları</h2>
+                    <p class="section-subtitle">Sizi takip etmeyen kullanıcıların listesi</p>
+                </div>
+                <div class="section-header-right">
+                    <div class="search-container">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="M21 21l-4.35-4.35"/>
+                        </svg>
+                        <input type="text" id="searchInput" placeholder="Kullanıcı adı ile ara...">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bulk Actions Panel -->
+            <div id="bulkActions" class="bulk-actions-panel" style="display: none;">
+                <div class="bulk-panel-left">
+                    <label class="master-checkbox">
+                        <input type="checkbox" id="selectAllCheckbox">
+                        <span class="checkbox-custom"></span>
+                    </label>
+                    <div class="selection-info">
+                        <span id="selectedCount" class="selection-count">0</span>
+                        <span class="selection-text">kullanıcı seçildi</span>
+                    </div>
+                    <div class="selection-divider"></div>
+                    <div class="selection-quick-actions">
+                        <button id="selectAllBtn" class="quick-action-btn">Tümünü Seç</button>
+                        <button id="selectNoneBtn" class="quick-action-btn">Temizle</button>
+                        <button id="selectInverseBtn" class="quick-action-btn">Ters Çevir</button>
+                    </div>
+                </div>
+                <div class="bulk-panel-right">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-right: 12px;">
+                        <label style="font-size: 13px; font-weight: 600; color: #64748b;">Hız:</label>
+                        <select id="unfollowSpeedSelect" style="padding: 8px 12px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 13px; font-weight: 600; background: white; color: #0f172a; cursor: pointer;">
+                            <option value="500">⚡ Çok Hızlı (0.5s)</option>
+                            <option value="800" selected>🚀 Hızlı (0.8s)</option>
+                            <option value="1500">🐢 Normal (1.5s)</option>
+                            <option value="2000">🐌 Yavaş (2s)</option>
+                        </select>
+                    </div>
+                    <button id="unfollowSelectedBtn" class="bulk-action-btn primary" disabled>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                            <circle cx="8.5" cy="7" r="4"/>
+                            <line x1="18" y1="8" x2="23" y2="13"/>
+                            <line x1="23" y1="8" x2="18" y2="13"/>
+                        </svg>
+                        <span>Takibi Bırak</span>
+                    </button>
+                    <button id="pauseUnfollowBtn" class="bulk-action-btn secondary" style="display: none;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="6" y="4" width="4" height="16"/>
+                            <rect x="14" y="4" width="4" height="16"/>
+                        </svg>
+                        <span>Duraklat</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Bulk Progress -->
+            <div id="bulkProgress" class="bulk-progress-panel" style="display: none;">
+                <div class="bulk-progress-header">
+                    <div class="bulk-progress-stats">
+                        <span id="bulkProgressText" class="progress-numbers">0 / 0</span>
+                        <span id="bulkProgressPercent" class="progress-percentage">0%</span>
+                    </div>
+                </div>
+                <div class="bulk-progress-track">
+                    <div id="bulkProgressBar" class="bulk-progress-active"></div>
+                </div>
+            </div>
+
+            <!-- Results Grid -->
+            <div id="results" class="users-grid"></div>
+        </div>
+    </main>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
