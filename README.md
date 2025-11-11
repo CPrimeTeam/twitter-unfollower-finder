@@ -2,6 +2,8 @@
 
 Twitter'da (X) sizi takip etmeyen kullanıcıları kolayca bulun ve toplu takibi bırakma işlemi yapın.
 
+> 💡 **Hızlı Başlangıç:** Bu eklenti ile Twitter'da hangi takip ettiğiniz kişilerin sizi takip etmediğini öğrenip, toplu şekilde takibi bırakabilirsiniz. Kurulumu 2 dakikadan kısa sürer!
+
 ## Özellikler
 
 - ✅ Modern dashboard arayüzü
@@ -22,27 +24,37 @@ Twitter'da takip ettiğiniz kişilerin profillerinde "Seni takip ediyor" (Follow
 2. Tüm takip ettiklerinizi tararken "Seni takip ediyor" yazısını kontrol eder
 3. Bu yazısı olmayanları "takip etmeyen" olarak listeler
 
-## Kurulum
+## Kurulum (3 Adımda Kurulum)
 
-1. **Chrome'a Yükleme**:
-   - Chrome'u açın ve `chrome://extensions/` adresine gidin
-   - Sağ üst köşeden "Geliştirici modu"nu açın
-   - "Paketlenmemiş uzantı yükle" butonuna tıklayın
-   - Zip'ten çıkardığınız klasörü seçin
+### Adım 1: Dosyaları İndirin
+1. Bu sayfanın sağ tarafında yeşil **"Code"** butonuna tıklayın
+2. **"Download ZIP"** seçeneğine tıklayın
+3. İndirilen ZIP dosyasını bilgisayarınızda bir klasöre çıkartın (Masaüstü gibi)
 
-2. **Kullanım**:
-   - Twitter'a (x.com) giriş yapın
-   - Chrome araç çubuğundaki eklenti ikonuna tıklayın (Dashboard açılır)
-   - "Taramayı Başlat" butonuna basın
-   - Eklenti otomatik olarak:
-     - Twitter Following sayfanıza yönlendirir
-     - Takip ettiklerinizi tek tek tarar
-     - "Seni takip ediyor" yazısını kontrol eder
-     - Tarama bitince dashboard'a geri döner
-   - Dashboard'da:
-     - Checkbox ile istediğiniz kullanıcıları seçin
-     - Hız ayarını belirleyin (Çok Hızlı/Hızlı/Normal/Yavaş)
-     - "Takibi Bırak" butonuna basın
+### Adım 2: Chrome'a Yükleyin
+1. **Google Chrome** tarayıcınızı açın
+2. Adres çubuğuna `chrome://extensions/` yazıp Enter'a basın
+3. Sağ üst köşedeki **"Geliştirici modu"** yazısının yanındaki düğmeyi açın (mavi olmalı)
+4. Sol üstte çıkan **"Paketlenmemiş uzantı yükle"** butonuna tıklayın
+5. ZIP'ten çıkardığınız klasörü seçin ve **"Klasörü Seç"** butonuna basın
+6. Eklenti yüklendi! Chrome araç çubuğunda eklenti ikonu görünecek
+
+### Adım 3: Kullanmaya Başlayın
+1. **Twitter'a giriş yapın** (twitter.com veya x.com)
+2. Chrome'da **eklenti ikonuna tıklayın** (sağ üstte, uzantılar arasında)
+3. Açılan **Dashboard sayfasında** "Taramayı Başlat" butonuna basın
+4. **Bekleyin:** Eklenti otomatik olarak:
+   - Following sayfanıza gider
+   - Tüm takip ettiklerinizi tarar
+   - Sizi takip etmeyenleri bulur
+   - Size geri Dashboard'a döner
+5. **Sonuçları görün:** Dashboard'da sizi takip etmeyenler listelenir
+6. **Toplu işlem yapın:**
+   - İstediğiniz kişileri ✅ checkbox ile seçin
+   - Hız ayarını seçin (Hızlı önerilir)
+   - "Takibi Bırak" butonuna basın
+
+✅ **Tarama bitince** otomatik olarak Dashboard'a yönlendirileceksiniz!
 
 ## Önemli Notlar
 
@@ -59,13 +71,18 @@ Twitter'da takip ettiğiniz kişilerin profillerinde "Seni takip ediyor" (Follow
 
 ## Sorun Giderme
 
-**"Hata: Twitter sayfasında olduğunuzdan emin olun!" mesajı alıyorsanız:**
+### ❌ Eklenti çalışmıyor
 - Twitter'a giriş yaptığınızdan emin olun
-- twitter.com veya x.com adresinde olduğunuzdan emin olun
+- Chrome'u yeniden başlatın
+- Eklentiyi kaldırıp tekrar yükleyin
 
-**Tarama çok uzun sürüyorsa:**
-- Çok fazla takipçiniz varsa normal olabilir
-- "Durdur" butonuyla işlemi sonlandırabilirsiniz
+### ⏱️ Tarama çok uzun sürüyor
+- Çok takip ettiğiniz kişi varsa normal olabilir
+- "Durdur" butonuyla durdurup daha sonra devam edebilirsiniz
+
+### 🚫 Takibi bırakma çalışmıyor
+- Çok hızlı seçtiyseniz, "Normal" veya "Yavaş" deneyin
+- Twitter rate limit uygulamış olabilir (birkaç saat bekleyin)
 
 ## Geliştirme
 
